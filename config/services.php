@@ -29,9 +29,9 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-    // 'twilio' => [
-    //     'sid' => env('AC2012d29d75db2ed14b5e2c86524bff0a'),
-    //     'token' => env('90761ad2049194cb8e51695b4185ccbf'),
-    //     'whatsapp_number' => env('6289531584234'),
-    // ],
+    'twilio' => [
+        'sid' => env('AC2012d29d75db2ed14b5e2c86524bff0a'),
+        'token' => env('90761ad2049194cb8e51695b4185ccbf'),
+        'whatsapp_number' => env('6289531584234'),
+    ],
 ];
