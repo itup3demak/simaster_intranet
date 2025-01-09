@@ -99,12 +99,13 @@ class KoordinatorController extends Controller
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:8000', // Validasi file foto
             'latitude' => 'required',
             'longitude' => 'required',
-            'keterangan' => 'required',
         ], $message);
 
         if ($validateData) {
+            // Simpan file foto ke dalam folder storage
             $fotoPath = $request->file('foto')->store('foto', 'public');
 
+            // Simpan data ke database
             UsulanRKAPModel::create([
                 'nama_petugas' => $request->input('nama_petugas'),
                 'nomor_hp' => $request->input('nomor_hp'),
