@@ -48,13 +48,13 @@ class UserController extends Controller
             $request->session()->regenerate();
             $user = Auth::user();
             $request->session()->put('role', $user->role);
-            if($user->role == 'user'){
+            if ($user->role == 'user') {
                 return redirect()->intended('entri_usulan_rkap');
-            }else if($user->role == 'koordinator'){
+            } else if ($user->role == 'koordinator') {
                 return redirect()->intended('koordinator');
-            }else if($user->role == 'mitra'){
+            } else if ($user->role == 'mitra') {
                 return redirect()->intended('keypoint');
-            }else{
+            } else {
                 return redirect()->intended('beranda');
             }
         } else {
@@ -91,7 +91,7 @@ class UserController extends Controller
     public function edit_user_simaster($id)
     {
         $layout = '';
-    
+
         switch (auth()->user()->role) {
             case 'administrator':
                 $layout = 'layout/templateberanda';
@@ -109,16 +109,16 @@ class UserController extends Controller
                 $layout = 'layout/default';
                 break;
         }
-    
+
         $data = [
             'title' => 'Edit User SIMASTER',
             'user' => User::find($id),
             'layout' => $layout
         ];
-    
+
         return view('edit_user_simaster', $data);
     }
-    
+
     public function proses_edit_user_simaster(Request $request, $id)
     {
         $message = [
@@ -128,27 +128,27 @@ class UserController extends Controller
             'min' => ':attribute minimal 2 kata/angka',
             'email' => ':attribute tidak valid',
         ];
-        
+
         $validateData = $request->validate([
             'name' => 'required|max:255|min:2',
             'username' => 'required|max:255|min:5',
-            'email' => 'required|email:dns|unique:users,email,'.$id,
+            'email' => 'required|email:dns|unique:users,email,' . $id,
             'password' => 'required|min:5|max:255|confirmed',
             'password_lama' => 'required',
         ], $message);
-        
+
         $user = User::find($id);
         if (!Hash::check($request->password_lama, $user->password)) {
             return back()->withErrors(['password_lama' => 'Password lama tidak sesuai']);
         }
-        if($request->filled('password')) {
+        if ($request->filled('password')) {
             $validateData['password'] = Hash::make($validateData['password']);
         } else {
             unset($validateData['password']);
         }
-        
+
         $user->update($validateData);
-        
+
         switch (auth()->user()->role) {
             case 'administrator':
                 return redirect('/beranda');
@@ -162,7 +162,7 @@ class UserController extends Controller
                 return redirect('/');
         }
     }
-    
+
     public function logout(Request $request)
     {
         Auth::logout();

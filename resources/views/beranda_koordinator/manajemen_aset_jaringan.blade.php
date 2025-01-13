@@ -102,8 +102,8 @@
                                                     data-bs-toggle="modal">
                                                     <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
                                                 </a>
-                                                <div class="modal modal-blur fade" id="{{ $app->id }}"
-                                                    tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal modal-blur fade" id="{{ $app->id }}" tabindex="-1"
+                                                    role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
